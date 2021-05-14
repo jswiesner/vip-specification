@@ -71,7 +71,7 @@
   <xs:simpleType name="GeospatialFormat">
     <xs:restriction base="xs:string">
       <xs:enumeration value="shp" />
-   </xs:restriction>
+    </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="IdentifierType">

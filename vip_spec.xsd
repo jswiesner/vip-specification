@@ -35,6 +35,13 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="ChecksumAlgorithm">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="sha-256" />
+      <xs:enumeration value="sha-512" />
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="DistrictType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="borough" />
@@ -252,6 +259,13 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="Checksum">
+    <xs:sequence>
+      <xs:element name="Algorithm" type="ChecksumAlgorithm" />
+      <xs:element name="Value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="ContactInformation">
     <xs:sequence>
       <xs:element name="AddressLine" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
@@ -361,7 +375,7 @@
   <xs:complexType name="ExternalFile">
     <xs:sequence>
       <xs:element name="Filename" type="xs:string" />
-      <xs:element name="Sha256Sum" type="xs:string" />
+      <xs:element name="Checksum" type="Checksum" />
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required" />
   </xs:complexType>

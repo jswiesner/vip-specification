@@ -367,7 +367,6 @@
       <xs:element name="Number" type="xs:integer" minOccurs="0" />
       <xs:element name="Type" type="DistrictType" />
       <xs:element name="OtherType" type="xs:string" minOccurs="0" />
-      <xs:element name="SpatialBoundary" type="SpatialBoundary" minOccurs="0" />
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required" />
   </xs:complexType>
@@ -610,6 +609,7 @@
       <xs:element name="Number" type="xs:string" minOccurs="0" maxOccurs="1" />
       <xs:element name="PollingLocationIds" type="xs:IDREFS" minOccurs="0" />
       <xs:element name="PrecinctSplitName" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SpatialBoundary" type="SpatialBoundary" minOccurs="0" />
       <xs:element name="Ward" type="xs:string" minOccurs="0" maxOccurs="1" />
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required" />

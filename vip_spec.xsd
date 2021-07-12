@@ -383,7 +383,7 @@
     <xs:sequence>
       <xs:element name="ExternalFileId" type="xs:IDREF" />
       <xs:element name="FileFormat" type="GeospatialFormat" />
-      <xs:element name="ShapeIndex" type="xs:integer" maxOccurs="unbounded" />
+      <xs:element name="ShapeIdentifier" type="xs:string" maxOccurs="unbounded" />
     </xs:sequence>
   </xs:complexType>
 

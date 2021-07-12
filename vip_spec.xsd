@@ -35,6 +35,13 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="ChecksumAlgorithm">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="sha-256" />
+      <xs:enumeration value="sha-512" />
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="DistrictType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="borough" />
@@ -58,6 +65,12 @@
       <xs:enumeration value="ward" />
       <xs:enumeration value="water" />
       <xs:enumeration value="other" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="GeospatialFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="shp" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -246,6 +259,13 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="Checksum">
+    <xs:sequence>
+      <xs:element name="Algorithm" type="ChecksumAlgorithm" />
+      <xs:element name="Value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="ContactInformation">
     <xs:sequence>
       <xs:element name="AddressLine" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
@@ -349,6 +369,22 @@
       <xs:element name="OtherType" type="xs:string" minOccurs="0" />
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ExternalFile">
+    <xs:sequence>
+      <xs:element name="Filename" type="xs:string" />
+      <xs:element name="Checksum" type="Checksum" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ExternalGeospatialFeature">
+    <xs:sequence>
+      <xs:element name="ExternalFileId" type="xs:IDREF" />
+      <xs:element name="FileFormat" type="GeospatialFormat" />
+      <xs:element name="ShapeIdentifier" type="xs:string" maxOccurs="unbounded" />
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="ExternalIdentifiers">
@@ -573,6 +609,7 @@
       <xs:element name="Number" type="xs:string" minOccurs="0" maxOccurs="1" />
       <xs:element name="PollingLocationIds" type="xs:IDREFS" minOccurs="0" />
       <xs:element name="PrecinctSplitName" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="SpatialBoundary" type="SpatialBoundary" minOccurs="0" />
       <xs:element name="Ward" type="xs:string" minOccurs="0" maxOccurs="1" />
     </xs:sequence>
     <xs:attribute name="id" type="xs:ID" use="required" />
@@ -597,6 +634,14 @@
       <xs:element name="City" type="xs:string"/>
       <xs:element name="State" type="xs:string"/>
       <xs:element name="Zip" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpatialBoundary">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="ExternalGeospatialFeature" type="ExternalGeospatialFeature" />
+      </xs:choice>
     </xs:sequence>
   </xs:complexType>
 
@@ -683,6 +728,8 @@
         <xs:element name="ElectionAdministration" type="ElectionAdministration" />
 
         <xs:element name="ElectoralDistrict" type="ElectoralDistrict" />
+
+        <xs:element name="ExternalFile" type="ExternalFile" />
 
         <xs:element name="HoursOpen" type="HoursOpen" />
 
